@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+  
+  config.vm.box = "ubuntu18_engineer365"
+  config.vm.network "private_network", ip: "192.168.33.11"
+  
+  config.vm.provider "virtualbox" do |vb|
+     vb.name = "store1.vm.engineer365.org"
+     vb.linked_clone = true
+  end
+  
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", inline: <<-SHELL
+  
+  SHELL
+end
