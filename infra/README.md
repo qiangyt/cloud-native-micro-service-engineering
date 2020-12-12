@@ -1,5 +1,6 @@
-注：以下命令暂时仅支持ubuntu，其它操作系统请参照着改动。可下载到文件可以参见https://download.wxcount.com:8443/engineer365/
-
+## 注：
+  - 以下命令暂时仅支持ubuntu，其它操作系统请参照着改动。可下载到文件可以参见https://download.wxcount.com:8443/engineer365/
+  - 需要一台物理机器。因为第一阶段是使用VirtualBox虚拟机，每台虚拟机内存设置为4GB，所以建议32G内存，或者需修改Vagrantfile、降低内存大小设置
 
 ## 准备工作
 
@@ -14,6 +15,9 @@ cd /data/
    https://www.virtualbox.org
 
 ```shell
+sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+sudo apt-get install -y linux-headers-$(uname -r) build-essential gcc make python zip cmake uuid tree jq
+
 VIRTUALBOX_DEB=virtualbox-6.1_6.1.14-140239_Ubuntu_$(lsb_release -cs)_amd64.deb
 wget --quiet "${DOWNLOAD_SITE}/virtualbox/${VIRTUALBOX_DEB}"
 sudo dpkg -i ${VIRTUALBOX_DEB}
@@ -35,27 +39,11 @@ sudo echo 'export VAGRANT_EXPERIMENTAL="disks"' >> /etc/profile
 source /etc/profile
 
 vagrant plugin install vagrant-vbguest
+# Installed the plugin 'vagrant-vbguest (0.28.0)'!
+
 vagrant plugin install vagrant-disksize
+# Installed the plugin 'vagrant-disksize (0.1.3)'!
 ```
 
 
-1. 从vagrant官网添加ubuntu/bionic64的vagrant box
-   
-   这一步是从vagrant官网添加vagrant box，然后导出保存到我们的镜像
-   网站的步骤，非常耗时。
-   因此，可以跳到下一步，直接从镜像网站下载。
 
-```shell
-vagrant box add ubuntu/bionic64
-vagrant box repackage ubuntu/bionic64 virtualbox 20201201.0.0
-mv package.box ubuntu-bionic.box
-```
-
-2. 从我们的镜像网站下载并添加ubuntu/bionic64的vagrant box
-   
-```shell
-UBUNTU_BIONIC_BOX=ubuntu-bionic.box
-wget --quiet "${DOWNLOAD_SITE}/vagrant/box/${UBUNTU_BIONIC_BOX}"
-vagrant box add ${UBUNTU_BIONIC_BOX} --name ubuntu/bionic64 --force
-rm ${UBUNTU_BIONIC_BOX}
-```

@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "engineer365/store"
+  config.vm.network "private_network", ip: "192.168.50.11"
+  config.vm.synced_folder "./data", "/data", create: true
+  
+  config.vm.provider "virtualbox" do |vb|
+     vb.name = "store1.engineer365.org"
+     vb.linked_clone = true
+  end
+
+  config.vm.provision "shell", inline: "sudo chown -R vagrant:vagrant /opt"
+  config.vm.provision "file", source: "./opt", destination: "/opt"
+
+  config.vm.provision "shell", path: "provision.sh"
+
+
+end
