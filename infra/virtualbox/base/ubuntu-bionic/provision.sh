@@ -116,5 +116,5 @@ ssh-keygen -P "" -t rsa -C "${dev_user}@${org}" -f /home/${dev_user}/.ssh/id_rsa
 cat /home/${dev_user}/.ssh/id_rsa.pub >> /home/${dev_user}/.ssh/authorized_keys 
 chown -R ${dev_user}:${dev_user} /home/${dev_user}/.ssh
 
-
-cp /home/vagrant/etc_hosts /etc/hosts
+## we have no DNS server yet, so just hardcode the /etc/hosts ------------------
+cat /home/vagrant/etc_hosts >> /etc/hosts

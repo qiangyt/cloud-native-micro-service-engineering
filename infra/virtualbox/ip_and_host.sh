@@ -25,7 +25,7 @@
 
 set -x
 
-etc_hosts_file=$infra_dir/etc_hosts
+etc_hosts_file=$virtualbox_dir/etc_hosts
 rm -f $etc_hosts_file
 
 

@@ -27,14 +27,7 @@ set -e
 set -x
 
 this_dir=$(cd "$(dirname $0)";pwd)
-infra_dir=$(cd "${this_dir}/../../";pwd)
-source $infra_dir/virtualbox.sh
+virtualbox_dir=$(cd "${this_dir}/../../";pwd)
+source $virtualbox_dir/virtualbox.sh
 
-
-box_file="${box_name____hashicorp_ubuntu_bionic}.box"
-rm -f ${box_file}
-wget --quiet "${box_download_path}/hashicorp/${box_file}"
-
-vagrant box add ${box_file} --name "hashicorp/${box_file}" --force
-
-rm ${box_file}
+export_box ${box_name____org_store}

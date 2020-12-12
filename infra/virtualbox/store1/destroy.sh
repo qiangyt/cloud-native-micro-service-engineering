@@ -27,7 +27,7 @@ set -e
 set -x
 
 this_dir=$(cd "$(dirname $0)";pwd)
-infra_dir=$(cd "${this_dir}/../../";pwd)
-source $infra_dir/virtualbox.sh
+virtualbox_dir=$(cd "${this_dir}/../../";pwd)
+source $virtualbox_dir/virtualbox.sh
 
-import_box ${box_name____org_ubuntu18}
+vagrant destroy

@@ -97,8 +97,4 @@ Vagrant.configure("2") do |config|
     s.args = "\"#{download_site}\" \"#{org}\" \"#{admin_user}\" \"#{dev_user}\""
   end
 
-  config.vm.provision "shell", inline: <<-SHELL
-    echo ENV[""] ENV[""]  >> /etc/hosts
-  SHELL
-
 end
