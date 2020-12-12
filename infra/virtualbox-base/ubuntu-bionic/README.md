@@ -1,23 +1,38 @@
-```shell
-BOX_NAME=ubuntu18-20201211
-BOX_FILE=engineer365-${BOX_NAME}.box
-```
+# 初始化和制作vagrant box的基础镜像
 
-1. 制作vagrant box的基础镜像
+  我们约定使用全部服务器VirtualBox虚拟机都使用Ubuntu 18 (Bionic)，下面步骤是制作一个专用的Ubuntu 18基础镜像。
 
-```shell
-vagrant up
-
-vagrant package --output ${BOX_FILE}
-vagrant box add ${BOX_FILE} --name engineer365/${BOX_NAME} --force
-vagrant destroy
-```
-
-2. 也可以跳过步骤#1，直接从我们的镜像网站下载并添加ubuntu18/engineer365的vagrant box
+1. 添加官方制作的ubuntu/bionic64的vagrant box
    
-```shell
-DOWNLOAD_SITE=https://download.wxcount.com:8443/engineer365
-wget --quiet "${DOWNLOAD_SITE}/vagrant/box/${BOX_FILE}"
-vagrant box add ${BOX_FILE} --name engineer365/${BOX_NAME} --force
-rm ${BOX_FILE}
-```
+   - 第一种方法是从vagrant官网下载添加
+
+     ```shell
+     vagrant box add ubuntu/bionic64
+     ```
+
+     可选的，添加成功后，可以执行以下命令导出保存成本地的box文件
+    
+     ```shell
+     vagrant box repackage ubuntu/bionic64 virtualbox 20201201.0.0
+     mv package.box ubuntu-bionic-20201201.box
+     ```
+
+   - 第二种方法，从vagrant官网直接添加vagrant box非常耗时，所以也可以从我们的镜像网站下载并添加
+
+     ```shell
+     ./import_hashicorp.sh
+     ```
+
+2. 制作我们专用的Ubuntu 18的基础镜像
+
+   - 第一种方法是自己制作，比较耗时
+  
+     ```shell
+     ./export.sh
+     ```
+
+   - 第二种方法，是可以从我们的镜像网站下载并添加
+
+     ```shell
+     ./import.sh
+     ```
